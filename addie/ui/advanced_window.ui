@@ -226,29 +226,82 @@
      </spacer>
     </item>
     <item>
-     <widget class="QGroupBox" name="idl_groupbox">
+     <widget class="QGroupBox" name="idl_config_group_box">
       <property name="title">
-       <string/>
+       <string>IDL Reduction Config</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <widget class="QLabel" name="label_3">
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QLabel" name="autoNOM_path_label">
+             <property name="text">
+              <string>autNOM: </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="autoNOM_path_line_edit"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="autoNOM_path_browse_button">
+             <property name="text">
+              <string>Browse ...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QLabel" name="sum_scans_path_label">
+             <property name="text">
+              <string>Sum Scans: </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="sum_scans_path_line_edit"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="sum_scans_path_browse_button">
+             <property name="text">
+              <string>Browse ...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="sum_scans_python_version_checkbox">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Use Sum Scans Python Version?</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton">
-           <property name="text">
-            <string>Browse ...</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <item>
+            <widget class="QLabel" name="ndabs_path_label">
+             <property name="text">
+              <string>NDabs:  </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="ndabs_path_line_edit"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="ndabs_path_browse_button">
+             <property name="text">
+              <string>Browse ...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
@@ -263,7 +316,7 @@
      <x>0</x>
      <y>0</y>
      <width>939</width>
-     <height>23</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
