@@ -113,6 +113,19 @@ class Step2GuiHandler(object):
             _output_file_name = self.default_ndabs_output_file_name
         return _output_file_name
 
+    def sum_scans_script_clicked(self):
+        """retrieve name of sum scans python script"""
+        print("HELLO")
+        _current_folder = self.parent_no_ui.current_folder
+        _sum_scans_path = QFileDialog.getOpenFileName(parent=self.parent_no_ui,
+                                                      caption="Select File",
+                                                      directory=_current_folder,
+                                                      filter=("Python (*.py);; All Files (*.*)"))
+        self.parent.ui.sum_scans_python_version_checkbox.setText(str(_sum_scans_path))
+
+    def get_sumscans_script(self):
+        return self.parent_no_ui.sum_scans_python_version_checkbox.text()
+
     def check_import_export_buttons(self):
         _export_status = False
         if self.main_window.postprocessing_ui.table.rowCount() > 0:

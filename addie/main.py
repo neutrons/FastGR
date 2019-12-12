@@ -600,6 +600,10 @@ class MainWindow(QMainWindow):
         o_gui = Step2GuiHandler(main_window=self)
         o_gui.reset_q_range()
 
+    def sum_scans_script_clicked(self):
+        o_gui = Step2GuiHandler(main_window=self)
+        o_gui.sum_scans_script_clicked()
+
     def run_ndabs_clicked(self):
         o_create_sample_files = CreateSampleFiles(parent=self)
         o_create_sample_files.run()
