@@ -243,7 +243,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="autoNOM_path_line_edit"/>
+            <widget class="QLineEdit" name="autoNOM_path_line_edit">
+             <property name="text">
+              <string>/SNS/NOM/shared/autoNOM/stable/autoNOM.py</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="autoNOM_path_browse_button">
@@ -264,7 +268,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="sum_scans_path_line_edit"/>
+            <widget class="QLineEdit" name="sum_scans_path_line_edit">
+             <property name="text">
+              <string>/SNS/NOM/shared/autoNOM/stable/sumscans.py</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="sum_scans_path_browse_button">
@@ -292,7 +300,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="ndabs_path_line_edit"/>
+            <widget class="QLineEdit" name="ndabs_path_line_edit">
+             <property name="text">
+              <string>/SNS/NOM/shared/autoNOM/stable/NDabs.py</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="ndabs_path_browse_button">
@@ -316,7 +328,7 @@
      <x>0</x>
      <y>0</y>
      <width>939</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
