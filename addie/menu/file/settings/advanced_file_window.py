@@ -38,7 +38,7 @@ class AdvancedWindow(QMainWindow):
         else:
             _mantid_status = True
 
-        self.ui.idl_groupbox.setVisible(self.parent.advanced_window_idl_groupbox_visible)
+        self.ui.idl_config_group_box.setVisible(self.parent.advanced_window_idl_groupbox_visible)
 
         self.ui.idl_post_processing_button.setChecked(_idl_status)
         self.ui.mantid_post_processing_button.setChecked(_mantid_status)
@@ -71,7 +71,7 @@ class AdvancedWindow(QMainWindow):
             _post = 'mantid'
             _idl_groupbox_visible = False
 
-        self.ui.idl_groupbox.setVisible(_idl_groupbox_visible)
+        self.ui.idl_config_group_box.setVisible(_idl_groupbox_visible)
         self.parent.post_processing = _post
         self.parent.activate_reduction_tabs() # hide or show right tabs
         self.parent.advanced_window_idl_groupbox_visible = _idl_groupbox_visible
