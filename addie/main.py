@@ -576,13 +576,13 @@ class MainWindow(QMainWindow):
         _o_gui = Step2GuiHandler(main_window=self)
         _o_gui.check_gui()
 
-    def hidrogen_clicked(self):
+    def hydrogen_clicked(self):
         o_gui = Step2GuiHandler(main_window=self)
-        o_gui.hidrogen_clicked()
+        o_gui.hydrogen_clicked()
 
-    def no_hidrogen_clicked(self):
+    def no_hydrogen_clicked(self):
         o_gui = Step2GuiHandler(main_window=self)
-        o_gui.no_hidrogen_clicked()
+        o_gui.no_hydrogen_clicked()
 
     def yes_background_clicked(self):
         o_gui = Step2GuiHandler(main_window=self)

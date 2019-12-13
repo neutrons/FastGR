@@ -34,14 +34,14 @@ class Step2GuiHandler(object):
             self.main_window.current_folder = _new_folder
             self.main_window.setWindowTitle(_new_folder)
 
-    def is_hidrogen_clicked(self):
+    def is_hydrogen_clicked(self):
         return self.main_window.postprocessing_ui.hydrogen_yes.isChecked()
 
-    def hidrogen_clicked(self):
+    def hydrogen_clicked(self):
         _range = self.hidrogen_range
         self.populate_hidrogen_range(_range)
 
-    def no_hidrogen_clicked(self):
+    def no_hydrogen_clicked(self):
         _range = self.no_hidrogen_range
         self.populate_hidrogen_range(_range)
 
@@ -121,10 +121,12 @@ class Step2GuiHandler(object):
                                                       caption="Select File",
                                                       directory=_current_folder,
                                                       filter=("Python (*.py);; All Files (*.*)"))
-        self.parent.ui.sum_scans_python_version_checkbox.setText(str(_sum_scans_path))
+        self.main_window.advanced_window_ui.sum_scans_python_version_checkbox.setText(str(_sum_scans_path))
 
     def get_sumscans_script(self):
-        return self.parent_no_ui.sum_scans_python_version_checkbox.text()
+        print(self.main_window)
+        print(self.main_window.advanced_window_ui)
+        return self.main_window.advanced_window_ui.sum_scans_python_version_checkbox.text()
 
     def check_import_export_buttons(self):
         _export_status = False
