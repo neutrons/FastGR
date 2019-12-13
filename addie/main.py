@@ -361,6 +361,13 @@ class MainWindow(QMainWindow):
         # color management
         self._pdfColorManager = PDFPlotManager()
 
+        # IDL config scripts
+        idl_script_dir = "/SNS/NOM/shared/autoNOM/stable/"
+        self._autonom_script = os.path.join(idl_script_dir, "autoNOM.py")
+        self._sum_scans_script = os.path.join(idl_script_dir, "sumscans.py")
+        self._ndabs_script = os.path.join(idl_script_dir, "NDabs.py")
+        self._is_sum_scans_python_checked = False
+
         # Connecting all the widgets
         main_tab_events_handler.run(main_window=self)
         autonom_tab_events_handler.run(main_window=self)
@@ -599,10 +606,6 @@ class MainWindow(QMainWindow):
     def reset_q_range(self):
         o_gui = Step2GuiHandler(main_window=self)
         o_gui.reset_q_range()
-
-    def sum_scans_script_clicked(self):
-        o_gui = Step2GuiHandler(main_window=self)
-        o_gui.sum_scans_script_clicked()
 
     def run_ndabs_clicked(self):
         o_create_sample_files = CreateSampleFiles(parent=self)

@@ -58,6 +58,13 @@ class AdvancedWindow(QMainWindow):
         self.ui.cache_dir_label.setText(self.parent.cache_folder)
         self.ui.output_dir_label.setText(self.parent.output_folder)
 
+        # IDL config
+        self.ui.autonom_path_line_edit.setText(self.parent._autonom_script)
+        self.ui.sum_scans_path_line_edit.setText(self.parent._sum_scans_script)
+        self.ui.ndabs_path_line_edit.setText(self.parent._ndabs_script)
+
+        self.ui.idl_config_browse_button_dialog = None
+
         self.ui.centralwidget.setContentsMargins(10, 10, 10, 10)
 
     def is_idl_selected(self):
@@ -96,6 +103,65 @@ class AdvancedWindow(QMainWindow):
         if _output_folder:
             self.ui.output_dir_label.setText(str(_output_folder))
             self.parent.output_folder = str(_output_folder)
+
+    # IDL Config - Line Edits
+    def autonom_path_line_edited(self):
+        """ update autonom script in top-level after line editing """
+        _script = str(self.ui.autonom_path_line_edit.text())
+        self.parent._autonom_script = _script
+
+    def sum_scans_path_line_edited(self):
+        """ update sum scans script in top-level after line editing """
+        _script = str(self.ui.sum_scans_path_line_edit.text())
+        self.parent._sum_scans_script = _script
+
+    def ndabs_path_line_edited(self):
+        """ update ndabs script in top-level after line editing """
+        _script = str(self.ui.ndabs_path_line_edit.text())
+        self.parent._ndabs_script = _script
+
+    # IDL Config - Browse Buttons
+    def _idl_button_clicked(self, line_edit, script_path):
+        """ Utility function to handle IDL script path browse buttons """
+
+        self.ui.idl_config_browse_button_dialog = QFileDialog()
+
+        _current_folder = self.parent.current_folder
+        _script_path = self.ui.idl_config_browse_button_dialog.getOpenFileName(
+            parent=self.ui,
+            caption="Select File",
+            directory=_current_folder,
+            filter=("Python (*.py);; All Files (*.*)"))
+
+        if _script_path[0] != '':
+            _script = str(_script_path[0])
+            line_edit.setText(_script)
+            script_path = _script
+
+        self.ui.idl_config_browse_button_dialog = None
+
+    def autonom_path_browse_button_clicked(self):
+        """ Handle browse button clicked for autonom script path """
+        line_edit = self.ui.autonom_path_line_edit
+        script_path = self.parent._autonom_script
+        self._idl_button_clicked(line_edit, script_path)
+
+    def sum_scans_path_browse_button_clicked(self):
+        """ Handle browse button clicked for sum scans script path """
+        line_edit = self.ui.sum_scans_path_line_edit
+        script_path = self.parent._sum_scans_script
+        self._idl_button_clicked(line_edit, script_path)
+
+    def ndabs_path_browse_button_clicked(self):
+        """ Handle browse button clicked for ndabs script path """
+        line_edit = self.ui.ndabs_path_line_edit
+        script_path = self.parent._ndabs_script
+        self._idl_button_clicked(line_edit, script_path)
+
+    def sum_scans_python_version_checkbox_toggled(self):
+        """ Handle the sum scans checkbox for using the python version """
+        _is_checked = self.ui.sum_scans_python_version_checkbox.isChecked()
+        self.parent._is_sum_scans_python_checked = _is_checked
 
     def closeEvent(self, c):
         self.parent.advanced_window_ui = None

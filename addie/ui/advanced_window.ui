@@ -236,17 +236,17 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_7">
            <item>
-            <widget class="QLabel" name="autoNOM_path_label">
+            <widget class="QLabel" name="autonom_path_label">
              <property name="text">
               <string>autNOM: </string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="autoNOM_path_line_edit"/>
+            <widget class="QLineEdit" name="autonom_path_line_edit"/>
            </item>
            <item>
-            <widget class="QPushButton" name="autoNOM_path_browse_button">
+            <widget class="QPushButton" name="autonom_path_browse_button">
              <property name="text">
               <string>Browse ...</string>
              </property>
@@ -331,8 +331,8 @@
    <slot>post_processing_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>143</x>
-     <y>149</y>
+     <x>134</x>
+     <y>232</y>
     </hint>
     <hint type="destinationlabel">
      <x>194</x>
@@ -347,8 +347,8 @@
    <slot>post_processing_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>83</x>
-     <y>149</y>
+     <x>84</x>
+     <y>232</y>
     </hint>
     <hint type="destinationlabel">
      <x>196</x>
@@ -380,7 +380,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>175</x>
-     <y>227</y>
+     <y>403</y>
     </hint>
     <hint type="destinationlabel">
      <x>562</x>
@@ -396,11 +396,123 @@
    <hints>
     <hint type="sourcelabel">
      <x>175</x>
-     <y>261</y>
+     <y>436</y>
     </hint>
     <hint type="destinationlabel">
      <x>124</x>
      <y>209</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>autonom_path_line_edit</sender>
+   <signal>editingFinished()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>autonom_path_line_edited()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>189</x>
+     <y>612</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>488</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sum_scans_path_line_edit</sender>
+   <signal>editingFinished()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>sum_scans_path_line_edited()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>644</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>515</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndabs_path_line_edit</sender>
+   <signal>editingFinished()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ndabs_path_line_edited()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>208</x>
+     <y>697</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>538</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>autonom_path_browse_button</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>autonom_path_browse_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>896</x>
+     <y>616</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>880</x>
+     <y>481</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sum_scans_path_browse_button</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>sum_scans_path_browse_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>857</x>
+     <y>648</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>848</x>
+     <y>504</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndabs_path_browse_button</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ndabs_path_browse_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>853</x>
+     <y>709</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>812</x>
+     <y>529</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sum_scans_python_version_checkbox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>sum_scans_python_version_checkbox_toggled()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>30</x>
+     <y>676</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>60</x>
+     <y>485</y>
     </hint>
    </hints>
   </connection>
@@ -412,5 +524,12 @@
   <slot>output_dir_button_clicked()</slot>
   <slot>add_key_value()</slot>
   <slot>remove_key_value_selected()</slot>
+  <slot>ndabs_path_line_edited()</slot>
+  <slot>autonom_path_line_edited()</slot>
+  <slot>sum_scans_path_line_edited()</slot>
+  <slot>autonom_path_browse_button_clicked()</slot>
+  <slot>sum_scans_path_browse_button_clicked()</slot>
+  <slot>ndabs_path_browse_button_clicked()</slot>
+  <slot>sum_scans_python_version_checkbox_toggled()</slot>
  </slots>
 </ui>
