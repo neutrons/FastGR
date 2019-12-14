@@ -62,7 +62,6 @@ class AdvancedWindow(QMainWindow):
         self.ui.autonom_path_line_edit.setText(self.parent._autonom_script)
         self.ui.sum_scans_path_line_edit.setText(self.parent._sum_scans_script)
         self.ui.ndabs_path_line_edit.setText(self.parent._ndabs_script)
-
         self.ui.idl_config_browse_button_dialog = None
 
         self.ui.centralwidget.setContentsMargins(10, 10, 10, 10)
@@ -124,19 +123,21 @@ class AdvancedWindow(QMainWindow):
     def _idl_button_clicked(self, line_edit, script_path):
         """ Utility function to handle IDL script path browse buttons """
 
-        self.ui.idl_config_browse_button_dialog = QFileDialog()
-
         _current_folder = self.parent.current_folder
-        _script_path = self.ui.idl_config_browse_button_dialog.getOpenFileName(
+
+        self.ui.idl_config_browse_button_dialog = QFileDialog(
             parent=self.ui,
-            caption="Select File",
             directory=_current_folder,
+            caption="Select File",
             filter=("Python (*.py);; All Files (*.*)"))
 
-        if _script_path[0] != '':
-            _script = str(_script_path[0])
-            line_edit.setText(_script)
-            script_path = _script
+        if self.ui.idl_config_browse_button_dialog.exec_():
+            _script_path = self.ui.idl_config_browse_button_dialog.selectedFile()
+
+            if _script_path[0] != '':
+                _script = str(_script_path[0])
+                line_edit.setText(_script)
+                script_path = _script
 
         self.ui.idl_config_browse_button_dialog = None
 

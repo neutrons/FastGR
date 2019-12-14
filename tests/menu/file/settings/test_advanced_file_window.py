@@ -48,9 +48,15 @@ def test_ndabs_path_line_edited(advanced_window):
     advanced_window.ndabs_path_line_edited()
     assert advanced_window.parent._ndabs_script == target
 
+
 def test_idl_button_clicked(qtbot, advanced_window):
+    """ Test the browse button function with a file dialog sub-widget """
+    # Handles closing the file dialog sub-widget after timer
     def handle_dialog():
         while advanced_window.ui.idl_config_browse_button_dialog is None:
             QtWidgets.QApplication.processEvents()
-    QtCore.QTimer.singleShot(100, handle_dialog)
+        advanced_window.ui.idl_config_browse_button_dialog.close()
+
+    # Setup closing the file diloag after 100 ms after left click on browse button
+    QtCore.QTimer.singleShot(1000, handle_dialog)
     qtbot.mouseClick(advanced_window.autonom_path_browse_button, QtCore.Qt.LeftButton, delay=1)
