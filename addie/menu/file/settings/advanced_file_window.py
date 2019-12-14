@@ -137,7 +137,7 @@ class AdvancedWindow(QMainWindow):
             if _script_path[0] != '':
                 _script = str(_script_path[0])
                 line_edit.setText(_script)
-                script_path = _script
+                script_path = _script  # noqa: F841
 
         self.ui.idl_config_browse_button_dialog = None
 
