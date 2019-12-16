@@ -5,6 +5,15 @@ from addie.menu.file.settings.advanced_file_window import AdvancedWindow
 from addie.main import MainWindow
 
 
+# Utilities / fixtures
+
+def handle_dialog():
+    ''' Handles closing QFileDialog after timer for IDL config tests '''
+    while advanced_window.ui.idl_config_browse_button_dialog is None:
+        QtWidgets.QApplication.processEvents()
+    advanced_window.ui.idl_config_browse_button_dialog.close()
+
+
 @pytest.fixture
 def main_window(qtbot):
     main_window = MainWindow()
@@ -15,6 +24,8 @@ def main_window(qtbot):
 def advanced_window(main_window):
     return AdvancedWindow(main_window)
 
+
+# Tests
 
 def test_autonom_path_line_edited(advanced_window):
     advanced_window.ui.autonom_path_line_edit.clear()
@@ -49,22 +60,31 @@ def test_ndabs_path_line_edited(advanced_window):
     assert advanced_window.parent._ndabs_script == target
 
 
-def test_idl_browse_buttons(qtbot, advanced_window):
-    """ Test the IDL config browse buttons with a file dialog sub-widget """
-    # Handles closing the file dialog sub-widget after timer
-    def handle_dialog():
-        while advanced_window.ui.idl_config_browse_button_dialog is None:
-            QtWidgets.QApplication.processEvents()
-        advanced_window.ui.idl_config_browse_button_dialog.close()
-
-    # autonom browse button
+def test_autonom_browse_button(qtbot, advanced_window):
+    """ Test the autonom browse buttons with a file dialog sub-widget """
+    target = advanced_window.parent._autonom_script
     QtCore.QTimer.singleShot(100, handle_dialog)
-    qtbot.mouseClick(advanced_window.autonom_path_browse_button, QtCore.Qt.LeftButton, delay=1)
+    qtbot.mouseClick(
+        advanced_window.autonom_path_browse_button,
+        QtCore.Qt.LeftButton, delay=1)
+    assert advanced_window.parent._autonom_script == target
 
-    # sum scans browse button
-    QtCore.QTimer.singleShot(100, handle_dialog)
-    qtbot.mouseClick(advanced_window.sum_scans_path_browse_button, QtCore.Qt.LeftButton, delay=1)
 
-    # ndabs browse button
+def test_sum_scans_browse_button(qtbot, advanced_window):
+    """ Test the sum scans browse buttons with a file dialog sub-widget """
+    target = advanced_window.parent._sum_scans_script
     QtCore.QTimer.singleShot(100, handle_dialog)
-    qtbot.mouseClick(advanced_window.ndabs_path_browse_button, QtCore.Qt.LeftButton, delay=1)
+    qtbot.mouseClick(
+        advanced_window.sum_scans_path_browse_button,
+        QtCore.Qt.LeftButton, delay=1)
+    assert advanced_window.parent._sum_scans_script == target
+
+
+def test_ndabs_browse_button(qtbot, advanced_window):
+    """ Test the ndabs browse buttons with a file dialog sub-widget """
+    target = advanced_window.parent._ndabs_script
+    QtCore.QTimer.singleShot(100, handle_dialog)
+    qtbot.mouseClick(
+        advanced_window.ndabs_path_browse_button,
+        QtCore.Qt.LeftButton, delay=1)
+    assert advanced_window.parent._ndabs_script == target
