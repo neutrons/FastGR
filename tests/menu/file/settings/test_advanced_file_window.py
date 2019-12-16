@@ -7,11 +7,11 @@ from addie.main import MainWindow
 
 # Utilities / fixtures
 
-def handle_dialog():
+def handle_dialog(dialog):
     ''' Handles closing QFileDialog after timer for IDL config tests '''
-    while advanced_window.ui.idl_config_browse_button_dialog is None:
+    while dialog is None:
         QtWidgets.QApplication.processEvents()
-    advanced_window.ui.idl_config_browse_button_dialog.close()
+    dialog.close()
 
 
 @pytest.fixture
@@ -63,7 +63,7 @@ def test_ndabs_path_line_edited(advanced_window):
 def test_autonom_browse_button(qtbot, advanced_window):
     """ Test the autonom browse buttons with a file dialog sub-widget """
     target = advanced_window.parent._autonom_script
-    QtCore.QTimer.singleShot(100, handle_dialog)
+    QtCore.QTimer.singleShot(100, lambda: handle_dialog(advanced_window.ui.idl_config_browse_button_dialog))
     qtbot.mouseClick(
         advanced_window.autonom_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
@@ -73,7 +73,7 @@ def test_autonom_browse_button(qtbot, advanced_window):
 def test_sum_scans_browse_button(qtbot, advanced_window):
     """ Test the sum scans browse buttons with a file dialog sub-widget """
     target = advanced_window.parent._sum_scans_script
-    QtCore.QTimer.singleShot(100, handle_dialog)
+    QtCore.QTimer.singleShot(100, lambda: handle_dialog(advanced_window.ui.idl_config_browse_button_dialog))
     qtbot.mouseClick(
         advanced_window.sum_scans_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
@@ -83,7 +83,7 @@ def test_sum_scans_browse_button(qtbot, advanced_window):
 def test_ndabs_browse_button(qtbot, advanced_window):
     """ Test the ndabs browse buttons with a file dialog sub-widget """
     target = advanced_window.parent._ndabs_script
-    QtCore.QTimer.singleShot(100, handle_dialog)
+    QtCore.QTimer.singleShot(100, lambda: handle_dialog(advanced_window.ui.idl_config_browse_button_dialog))
     qtbot.mouseClick(
         advanced_window.ndabs_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
