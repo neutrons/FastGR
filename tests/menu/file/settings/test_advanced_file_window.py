@@ -18,17 +18,12 @@ def close_dialog(dialog):
 
 def select_and_close_dialog(dialog, directory, filename, delay=0.5):
     ''' Handles selecting and closing QFileDialog for IDL config tests '''
+
     while dialog is None:
         QtWidgets.QApplication.processEvents()
     # delays to allow files to load in dialog and select file
-    time.sleep(delay)
-    dialog.setDirectory(directory)
-    while dialog.directory().path() != directory:
-        time.sleep(delay)
+    # dialog.setDirectory(directory)
     dialog.selectFile(filename)
-    path = os.path.join(directory, filename)
-    while dialog.selectedFiles()[0] != os.path.abspath(path):
-        time.sleep(delay)
     dialog.accept()
 
 
@@ -94,7 +89,7 @@ def test_autonom_browse_button(qtbot, advanced_window):
     filename = 'setup.py'
     target = os.path.join(directory, filename)
     QtCore.QTimer.singleShot(
-        100,
+        10,
         lambda: select_and_close_dialog(
             advanced_window.ui.idl_config_browse_button_dialog,
             directory,
@@ -121,7 +116,7 @@ def test_sum_scans_browse_button(qtbot, advanced_window):
     filename = 'setup.py'
     target = os.path.join(directory, filename)
     QtCore.QTimer.singleShot(
-        100,
+        10,
         lambda: select_and_close_dialog(
             advanced_window.ui.idl_config_browse_button_dialog,
             directory,
@@ -148,7 +143,7 @@ def test_ndabs_browse_button(qtbot, advanced_window):
     filename = 'setup.py'
     target = os.path.join(directory, filename)
     QtCore.QTimer.singleShot(
-        100,
+        10,
         lambda: select_and_close_dialog(
             advanced_window.ui.idl_config_browse_button_dialog,
             directory,
