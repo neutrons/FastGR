@@ -26,7 +26,8 @@ def select_and_close_dialog(dialog, directory, filename, delay=0.5):
     while dialog.directory().path() != directory:
         time.sleep(delay)
     dialog.selectFile(filename)
-    while dialog.selectedFiles()[0] != os.path.abspath(os.path.join(directory, filename)):
+    path = os.path.join(directory, filename)
+    while dialog.selectedFiles()[0] != os.path.abspath(path):
         time.sleep(delay)
     dialog.accept()
 
@@ -80,7 +81,10 @@ def test_ndabs_path_line_edited(advanced_window):
 def test_autonom_browse_button(qtbot, advanced_window):
     """ Test the autonom browse buttons with a file dialog sub-widget """
     target = advanced_window.parent._autonom_script
-    QtCore.QTimer.singleShot(100, lambda: close_dialog(advanced_window.ui.idl_config_browse_button_dialog))
+    QtCore.QTimer.singleShot(
+        100,
+        lambda: close_dialog(
+            advanced_window.ui.idl_config_browse_button_dialog))
     qtbot.mouseClick(
         advanced_window.autonom_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
@@ -89,7 +93,12 @@ def test_autonom_browse_button(qtbot, advanced_window):
     directory = os.path.abspath('.')
     filename = 'setup.py'
     target = os.path.join(directory, filename)
-    QtCore.QTimer.singleShot(100, lambda: select_and_close_dialog(advanced_window.ui.idl_config_browse_button_dialog, directory, filename))
+    QtCore.QTimer.singleShot(
+        100,
+        lambda: select_and_close_dialog(
+            advanced_window.ui.idl_config_browse_button_dialog,
+            directory,
+            filename))
     qtbot.mouseClick(
         advanced_window.autonom_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
@@ -99,7 +108,10 @@ def test_autonom_browse_button(qtbot, advanced_window):
 def test_sum_scans_browse_button(qtbot, advanced_window):
     """ Test the sum scans browse buttons with a file dialog sub-widget """
     target = advanced_window.parent._sum_scans_script
-    QtCore.QTimer.singleShot(100, lambda: close_dialog(advanced_window.ui.idl_config_browse_button_dialog))
+    QtCore.QTimer.singleShot(
+        100,
+        lambda: close_dialog(
+            advanced_window.ui.idl_config_browse_button_dialog))
     qtbot.mouseClick(
         advanced_window.sum_scans_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
@@ -108,7 +120,12 @@ def test_sum_scans_browse_button(qtbot, advanced_window):
     directory = os.path.abspath('.')
     filename = 'setup.py'
     target = os.path.join(directory, filename)
-    QtCore.QTimer.singleShot(100, lambda: select_and_close_dialog(advanced_window.ui.idl_config_browse_button_dialog, directory, filename))
+    QtCore.QTimer.singleShot(
+        100,
+        lambda: select_and_close_dialog(
+            advanced_window.ui.idl_config_browse_button_dialog,
+            directory,
+            filename))
     qtbot.mouseClick(
         advanced_window.sum_scans_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
@@ -118,7 +135,10 @@ def test_sum_scans_browse_button(qtbot, advanced_window):
 def test_ndabs_browse_button(qtbot, advanced_window):
     """ Test the ndabs browse buttons with a file dialog sub-widget """
     target = advanced_window.parent._ndabs_script
-    QtCore.QTimer.singleShot(100, lambda: close_dialog(advanced_window.ui.idl_config_browse_button_dialog))
+    QtCore.QTimer.singleShot(
+        100,
+        lambda: close_dialog(
+            advanced_window.ui.idl_config_browse_button_dialog))
     qtbot.mouseClick(
         advanced_window.ndabs_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
@@ -127,7 +147,12 @@ def test_ndabs_browse_button(qtbot, advanced_window):
     directory = os.path.abspath('.')
     filename = 'setup.py'
     target = os.path.join(directory, filename)
-    QtCore.QTimer.singleShot(100, lambda: select_and_close_dialog(advanced_window.ui.idl_config_browse_button_dialog, directory, filename))
+    QtCore.QTimer.singleShot(
+        100,
+        lambda: select_and_close_dialog(
+            advanced_window.ui.idl_config_browse_button_dialog,
+            directory,
+            filename))
     qtbot.mouseClick(
         advanced_window.ndabs_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
