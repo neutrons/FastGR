@@ -1,4 +1,6 @@
+import os
 import pytest
+import time
 from qtpy import QtCore, QtWidgets
 
 from addie.menu.file.settings.advanced_file_window import AdvancedWindow
@@ -7,11 +9,26 @@ from addie.main import MainWindow
 
 # Utilities / fixtures
 
-def handle_dialog(dialog):
-    ''' Handles closing QFileDialog after timer for IDL config tests '''
+def close_dialog(dialog):
+    ''' Handles closing QFileDialog for IDL config tests '''
     while dialog is None:
         QtWidgets.QApplication.processEvents()
     dialog.close()
+
+
+def select_and_close_dialog(dialog, directory, filename, delay=0.5):
+    ''' Handles selecting and closing QFileDialog for IDL config tests '''
+    while dialog is None:
+        QtWidgets.QApplication.processEvents()
+    # delays to allow files to load in dialog and select file
+    time.sleep(delay)
+    dialog.setDirectory(directory)
+    while dialog.directory().path() != directory:
+        time.sleep(delay)
+    dialog.selectFile(filename)
+    while dialog.selectedFiles()[0] != os.path.abspath(os.path.join(directory, filename)):
+        time.sleep(delay)
+    dialog.accept()
 
 
 @pytest.fixture
@@ -63,7 +80,7 @@ def test_ndabs_path_line_edited(advanced_window):
 def test_autonom_browse_button(qtbot, advanced_window):
     """ Test the autonom browse buttons with a file dialog sub-widget """
     target = advanced_window.parent._autonom_script
-    QtCore.QTimer.singleShot(100, lambda: handle_dialog(advanced_window.ui.idl_config_browse_button_dialog))
+    QtCore.QTimer.singleShot(100, lambda: close_dialog(advanced_window.ui.idl_config_browse_button_dialog))
     qtbot.mouseClick(
         advanced_window.autonom_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
@@ -73,17 +90,26 @@ def test_autonom_browse_button(qtbot, advanced_window):
 def test_sum_scans_browse_button(qtbot, advanced_window):
     """ Test the sum scans browse buttons with a file dialog sub-widget """
     target = advanced_window.parent._sum_scans_script
-    QtCore.QTimer.singleShot(100, lambda: handle_dialog(advanced_window.ui.idl_config_browse_button_dialog))
+    QtCore.QTimer.singleShot(100, lambda: close_dialog(advanced_window.ui.idl_config_browse_button_dialog))
     qtbot.mouseClick(
         advanced_window.sum_scans_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
+    assert advanced_window.parent._sum_scans_script == target
+
+    directory = os.path.abspath('addie')
+    filename = 'about.py'
+    target = os.path.join(directory, filename)
+    QtCore.QTimer.singleShot(100, lambda: select_and_close_dialog(advanced_window.ui.idl_config_browse_button_dialog, directory, filename))
+    qtbot.mouseClick(
+        advanced_window.sum_scans_path_browse_button,
+        QtCore.Qt.LeftButton, delay=2)
     assert advanced_window.parent._sum_scans_script == target
 
 
 def test_ndabs_browse_button(qtbot, advanced_window):
     """ Test the ndabs browse buttons with a file dialog sub-widget """
     target = advanced_window.parent._ndabs_script
-    QtCore.QTimer.singleShot(100, lambda: handle_dialog(advanced_window.ui.idl_config_browse_button_dialog))
+    QtCore.QTimer.singleShot(100, lambda: close_dialog(advanced_window.ui.idl_config_browse_button_dialog))
     qtbot.mouseClick(
         advanced_window.ndabs_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
