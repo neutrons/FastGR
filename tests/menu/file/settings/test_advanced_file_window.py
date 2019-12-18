@@ -151,3 +151,17 @@ def test_ndabs_browse_button(qtbot, advanced_window):
         advanced_window.ndabs_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
     assert advanced_window.parent._ndabs_script == target
+
+
+def test_sum_scans_python_version_checkbox_toggled(qtbot, advanced_window):
+    """ Test the sum scans python version checkbox works """
+    checkbox = advanced_window.sum_scans_python_version_checkbox
+    initialState = advanced_window.parent._is_sum_scans_python_checked
+
+    qtbot.mouseClick(checkbox, QtCore.Qt.LeftButton)
+    assert checkbox.isChecked() != initialState
+    assert advanced_window.parent._is_sum_scans_python_checked != initialState
+
+    qtbot.mouseClick(checkbox, QtCore.Qt.LeftButton)
+    assert checkbox.isChecked() == initialState
+    assert advanced_window.parent._is_sum_scans_python_checked == initialState
