@@ -1,6 +1,5 @@
 import os
 import pytest
-import time
 from qtpy import QtCore, QtWidgets
 
 from addie.menu.file.settings.advanced_file_window import AdvancedWindow
@@ -152,4 +151,3 @@ def test_ndabs_browse_button(qtbot, advanced_window):
         advanced_window.ndabs_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
     assert advanced_window.parent._ndabs_script == target
-
