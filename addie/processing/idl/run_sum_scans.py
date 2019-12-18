@@ -41,7 +41,7 @@ class RunSumScans(object):
 
         if not self.parent.interactive_mode_checkbox.isChecked():
             _script += " -n True "
-        if self.parent.pytest.isChecked():
+        if self.parent_no_ui._is_sum_scans_python_checked:
             _script += " -u True "
 
         qmax_list = str(self.parent.pdf_qmax_line_edit.text()).strip()
