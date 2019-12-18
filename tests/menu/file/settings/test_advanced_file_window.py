@@ -86,6 +86,15 @@ def test_autonom_browse_button(qtbot, advanced_window):
         QtCore.Qt.LeftButton, delay=1)
     assert advanced_window.parent._autonom_script == target
 
+    directory = os.path.abspath('.')
+    filename = 'setup.py'
+    target = os.path.join(directory, filename)
+    QtCore.QTimer.singleShot(100, lambda: select_and_close_dialog(advanced_window.ui.idl_config_browse_button_dialog, directory, filename))
+    qtbot.mouseClick(
+        advanced_window.autonom_path_browse_button,
+        QtCore.Qt.LeftButton, delay=1)
+    assert advanced_window.parent._autonom_script == target
+
 
 def test_sum_scans_browse_button(qtbot, advanced_window):
     """ Test the sum scans browse buttons with a file dialog sub-widget """
@@ -96,13 +105,13 @@ def test_sum_scans_browse_button(qtbot, advanced_window):
         QtCore.Qt.LeftButton, delay=1)
     assert advanced_window.parent._sum_scans_script == target
 
-    directory = os.path.abspath('addie')
-    filename = 'about.py'
+    directory = os.path.abspath('.')
+    filename = 'setup.py'
     target = os.path.join(directory, filename)
     QtCore.QTimer.singleShot(100, lambda: select_and_close_dialog(advanced_window.ui.idl_config_browse_button_dialog, directory, filename))
     qtbot.mouseClick(
         advanced_window.sum_scans_path_browse_button,
-        QtCore.Qt.LeftButton, delay=2)
+        QtCore.Qt.LeftButton, delay=1)
     assert advanced_window.parent._sum_scans_script == target
 
 
@@ -114,3 +123,13 @@ def test_ndabs_browse_button(qtbot, advanced_window):
         advanced_window.ndabs_path_browse_button,
         QtCore.Qt.LeftButton, delay=1)
     assert advanced_window.parent._ndabs_script == target
+
+    directory = os.path.abspath('.')
+    filename = 'setup.py'
+    target = os.path.join(directory, filename)
+    QtCore.QTimer.singleShot(100, lambda: select_and_close_dialog(advanced_window.ui.idl_config_browse_button_dialog, directory, filename))
+    qtbot.mouseClick(
+        advanced_window.ndabs_path_browse_button,
+        QtCore.Qt.LeftButton, delay=1)
+    assert advanced_window.parent._ndabs_script == target
+
